@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StBtn = (props) => {
-  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children } = props;
-  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize };
+  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children, margin } = props;
+  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize, margin };
 
   return (
     <Button {...styles} onClick={onClick}>
@@ -29,6 +29,7 @@ const Button = styled.button`
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
+  margin: ${(props) => props.margin};
   cursor: pointer;
 `;
 

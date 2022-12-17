@@ -11,20 +11,18 @@ const Layout = ({ children }) => {
 
 const Wrap = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 98vh;
   display: flex;
-  margin: 0px;
-  background-color: #eee8aa;
 `;
 
 const TodoBox = styled.div`
-  max-width: 26rem;
+  max-width: 25rem;
   width: 90%;
-  height: 45rem;
+  height: 46rem;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 1px 1px gray;
-  padding: 3rem 4rem;
+  padding: 2rem 4rem;
   margin: auto;
 `;
 

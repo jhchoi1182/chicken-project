@@ -10,7 +10,7 @@ const StInput = (props) => {
 
 StInput.defaultProps = {
   borderRadius: "10px",
-  fontSize: "20px",
+  fontSize: "15px",
   width: "80%",
   height: "2.5rem",
   border: "1px",
@@ -23,6 +23,10 @@ const Input = styled.input`
   width: ${(props) => props.width};
   border-radius: ${(props) => props.borderRadius};
   text-indent: 10px;
+  :focus{
+    outline: 2px solid 	#1E90FF;
+    border: 1px solid transparent
+  }
   ::placeholder {
     text-indent: 10px;
     opacity: 1;
