@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const StSection = (props) => {
+const StForm = (props) => {
   const { gap, paddingTop, children, alignItem } = props;
   const styles = { gap, paddingTop, alignItem };
 
   return <Section {...styles}>{children}</Section>;
 };
 
-StSection.defaultProps = {
+StForm.defaultProps = {
   gap: "2rem",
   paddingTop: "1rem",
   alignItem: "",
 };
 
-const Section = styled.section`
+const Section = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -23,4 +23,4 @@ const Section = styled.section`
   padding-top: ${(props) => props.paddingTop};
 `;
 
-export default StSection;
+export default StForm;
