@@ -1,7 +1,10 @@
-import "./App.css";
+import React from 'react'
+import Router from './components/shared/Router'
 
-function App() {
-  return <div className="App"></div>;
+const App = () => {
+  return (
+    <Router />
+  )
 }
 
-export default App;
+export default App
