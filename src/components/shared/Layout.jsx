@@ -1,7 +1,37 @@
 import React from "react";
+import styled from "styled-components";
+import Chick from "./Chick";
+import Header from "./Header";
 
 const Layout = ({ children }) => {
-  return <div>{children}</div>;
+  return (
+    <Wrap>
+      <TodoBox>
+        <Header />
+        <Chick />
+        {children}
+      </TodoBox>
+    </Wrap>
+  );
 };
+
+const Wrap = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  margin: 0px;
+  background-color: #eee8aa;
+`;
+
+const TodoBox = styled.div`
+  max-width: 28rem;
+  width: 90%;
+  height: 45rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px gray;
+  padding: 3rem 4rem;
+  margin: auto;
+`;
 
 export default Layout;
