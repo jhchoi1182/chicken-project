@@ -29,6 +29,7 @@ const Button = styled.button`
   border-radius: ${(props) => props.borderRadius};
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
+  cursor: pointer;
 `;
 
 export default StBtn;
