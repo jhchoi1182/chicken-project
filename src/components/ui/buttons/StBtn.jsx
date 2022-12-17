@@ -11,6 +11,7 @@ const StBtn = (props) => {
     </Button>
   );
 };
+
 StBtn.defaultProps = {
   border: "2px",
   borderRadius: "10px",

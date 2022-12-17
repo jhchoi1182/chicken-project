@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StBtn from "../Buttons/StButton";
+import StBtn from "../ui/buttons/StBtn";
 
 const Header = () => {
   return (
