@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import StBtn from "../Buttons/StButton";
+import StBtn from "../ui/buttons/StBtn";
 
 const Header = () => {
-  return (
-    <Wrap>
-      <StBtn>안녕</StBtn>
-    </Wrap>
-  );
+  return <Wrap>Header 스타일은 추후 제가 수정할게요</Wrap>;
 };
 
 const Wrap = styled.div`

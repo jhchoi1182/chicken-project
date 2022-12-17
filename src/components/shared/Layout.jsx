@@ -1,16 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Chick from "./Chick";
-import Header from "./Header";
 
 const Layout = ({ children }) => {
   return (
     <Wrap>
-      <TodoBox>
-        <Header />
-        <Chick />
-        {children}
-      </TodoBox>
+      <TodoBox>{children}</TodoBox>
     </Wrap>
   );
 };
@@ -24,7 +18,7 @@ const Wrap = styled.div`
 `;
 
 const TodoBox = styled.div`
-  max-width: 28rem;
+  max-width: 26rem;
   width: 90%;
   height: 45rem;
   background-color: white;
