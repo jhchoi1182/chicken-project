@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StInput = (props) => {
-  const { fontSize, width, height, borderRadius, onChange, border, borderColor } = props;
-  const styles = { borderRadius, width, height, fontSize, border, borderColor };
+  const { fontSize, width, height, borderRadius, onChange, border, borderColor, margin, name } = props;
+  const styles = { borderRadius, width, height, fontSize, border, borderColor, margin, name };
 
   return <Input {...styles} onChange={onChange} />;
 };
@@ -23,13 +23,11 @@ const Input = styled.input`
   width: ${(props) => props.width};
   border-radius: ${(props) => props.borderRadius};
   text-indent: 10px;
+  margin: ${(props) => props.margin};
+  name: ${(props) => props.name};
   :focus{
-    outline: 2px solid 	#1E90FF;
+    outline: 2px solid 	#e6d96b;
     border: 1px solid transparent
-  }
-  ::placeholder {
-    text-indent: 10px;
-    opacity: 1;
   }
 `;
 
