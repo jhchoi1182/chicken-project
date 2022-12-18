@@ -30,7 +30,14 @@ const Button = styled.button`
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   margin: ${(props) => props.margin};
-  cursor: pointer;
+  :disabled {
+    
+  }
+  :hover {
+    cursor: pointer;
+    border: ${(props) => props.border} solid ${(props) => props.HoverColor};
+  }
+  
 `;
 
 export default StBtn;
