@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Chick from "../shared/Chick";
@@ -8,6 +9,7 @@ import StInput from "../ui/inputs/StInput";
 
 const Login = () => {
   const navigate = useNavigate();
+  // const dispatch = useDispatch()
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
     password: ""
@@ -18,27 +20,38 @@ const Login = () => {
     setEnteredInfo({...edteredInfo, [name]: value})
   }
 
-  const a = edteredInfo.account.length
-  const b = edteredInfo.password.length
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    // dispatch(__login(edteredInfo))
+    setEnteredInfo({
+      account: "",
+      password: ""  
+    })
+    // navigate('')
+  }
+
+  const aLength = edteredInfo.account.length
+  const bLength = edteredInfo.password.length
 
   return (
     <section>
       <LoginHeader>Todo</LoginHeader>
       <Chick />
-      <StForm gap="1.5rem" paddingTop="1rem" alignItem="center">
+      <StForm gap="1.5rem" paddingTop="1rem" alignItem="center" onSubmit={onSubmitHandler}>
         <Div>
           <div className="input-box">
             <label>아이디</label>
             <StInput width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="account" value={edteredInfo.account} onChange={onChangeHandler} />
-            <IDValidity className="test" length={edteredInfo.account.length} >3~10자를 입력해주세요.</IDValidity>
+            <IDValidity length={aLength} >3~15자를 입력해주세요.</IDValidity>
           </div>
           <div className="input-box">
            <label>비밀번호</label>
-          <StInput type="password" width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="password" value={edteredInfo.password} onChange={onChangeHandler}/>
-          <PWValidity length={edteredInfo.password.length}>4~20자를 입력해주세요.</PWValidity> 
+          <StInput type="password" width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="password" value={edteredInfo.password} onChange={onChangeHandler} />
+          <PWValidity length={bLength}>4~20자를 입력해주세요.</PWValidity> 
           </div>
         </Div>
-        <StBtn type="submit" width="82%" margin="0px 0px 0px 3px">로그인</StBtn>
+        <StBtn type="submit" width="82%" margin="0px 0px 0px 3px"
+        disabled={(aLength > 2 && aLength <= 15) && (bLength > 2 && bLength <= 20) ? false : true}>로그인</StBtn>
         <StBtn width="82%" margin="0px 0px 0px 3px" type="button" onClick={() => navigate('/signup')}>회원가입</StBtn>
       </StForm>
     </section>
@@ -60,25 +73,23 @@ const Div = styled.div`
   margin-bottom: -0.3rem;
   .input-box {
     padding: 2px 0px;
+    height: 5.7rem;
   }
   .input-box:nth-child(2) {
     margin-bottom: -0.5rem;
   }
 `
 
-// const PWInput = styled(StInput).attrs({
-//   type: "password"
-// })``
-
 const IDValidity = styled.label`
-  color: ${({length}) => (length > 2 && length <= 10 || length === 0 ? "transparent" : "red")};
+  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
+  color: red;
   font-size: 0.9rem;
 `
 
 const PWValidity = styled.label`
-  color: ${({length}) => (length > 2 && length <= 20 || length === 0 ? "transparent" : "red")};
+  display: ${({length}) => (length > 2 && length <= 20 || length === 0 ? "none" : "block")};;
+  color: red;
   font-size: 0.9rem;
 `
-
 
 export default Login;

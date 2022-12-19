@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { __signUp } from "../../redux/modules/LoginSlice";
 import Chick from "../shared/Chick";
 import StBtn from "../ui/buttons/StBtn";
 import StForm from "../ui/div/StForm";
@@ -8,34 +10,72 @@ import StInput from "../ui/inputs/StInput";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [edteredSignUpInfo, setEnteredSignUpInfo] = useState({
+    nickname: "",
+    account: "",
+    password: "",
+    confirm: ""
+  })
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.target
+    setEnteredSignUpInfo({...edteredSignUpInfo, [name]: value})
+  }
+
+  const onSubmitHandler = () => {
+    dispatch(__signUp(edteredSignUpInfo))
+    setEnteredSignUpInfo({
+      nickname: "",
+      account: "",
+      password: "",
+      confirm: ""
+    })
+    // alert("회원가입 성공!")
+    // navigate('/')
+  }
+  
+  const aLength = edteredSignUpInfo.nickname.length
+  const bLength = edteredSignUpInfo.account.length
+  const cLength = edteredSignUpInfo.password.length
+  const dLength = edteredSignUpInfo.confirm.length
 
   return <section>
       <SignupHeader>
-        <div />
+        <StBtn width='' margin='0px 0px 0px -2.5rem' 
+        disabled={
+          (aLength, bLength > 2 && aLength, bLength <= 15) && 
+          (cLength > 3 && cLength <= 20) && (cLength === dLength) ?
+          false : true}
+        onClick={onSubmitHandler}>회원가입</StBtn>
         <div className="title">
           분양 받기
         </div>
         <StBtn width='' margin='0px -2.5rem 0px 0px' onClick={() => navigate('/')}>뒤로가기</StBtn>
       </SignupHeader>
     <Chick />
-    <StForm alignItem="center">
+    <StForm gap="1.5rem" paddingTop="1rem" alignItem="center">
       <Div>
         <div className="input-box">
           <label>닉네임</label>
-          <StInput width="100%"/>
-          <label className="validity">유효성 검사</label>
+          <StInput width="100%" height="2rem" borderRadius="8px" margin="0.3rem 0rem 0.1rem 0rem" name="nickname" value={edteredSignUpInfo.nickname} onChange={onChangeHandler} />
+          <NickValidity length={aLength}>3~15자를 입력해주세요.</NickValidity>
         </div>
         <div className="input-box">
           <label>아이디</label>
-          <StInput width="100%"/>
-          <label className="validity">유효성 검사</label>
+          <StInput width="100%" height="2rem" borderRadius="8px" margin="0.3rem 0rem 0.1rem 0rem" name="account" value={edteredSignUpInfo.account} onChange={onChangeHandler} />
+          <IdValidity length={bLength}>3~15자를 입력해주세요.</IdValidity>
         </div>
         <div className="input-box">
           <label>비밀번호</label>
-          <StInput width="100%"/>
-          <label className="validity">유효성 검사</label>
+          <StInput type="password" width="100%" height="2rem" borderRadius="8px" margin="0.3rem 0rem 0.1rem 0rem" name="password" value={edteredSignUpInfo.password} onChange={onChangeHandler} />
+          <PwValidity length={cLength}>4~20자를 입력해주세요.</PwValidity>
         </div>
-        <StBtn width="102%" margin='-0.3rem 0px 0px 0px'>회원가입</StBtn>
+        <div className="input-box">
+          <label>비밀번호 확인</label>
+          <StInput type="password" width="100%" height="2rem" borderRadius="8px" margin="0.3rem 0rem 0.1rem 0rem" name="confirm" value={edteredSignUpInfo.confirm} onChange={onChangeHandler} />
+          <Confirm length={[cLength, dLength]} >비밀번호가 일치하지 않습니다.</Confirm>
+        </div>
       </Div>
     </StForm>
   </section>;
@@ -46,13 +86,33 @@ const Div = styled.div`
   display: block;
   .input-box {
     padding: 2px 0px;
+    margin-bottom: -0.3rem;
+    height: 5.15rem;
   }
-  .input-box:nth-child(3) {
-    margin-bottom: 10px;
-  }
-  .validity {
-    color: transparent;
-  }
+`
+
+
+
+const NickValidity = styled.label`
+  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
+  color: red;
+  font-size: 0.9rem;
+`
+
+const IdValidity = styled.label`
+  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
+  color: red;
+  font-size: 0.9rem;
+`
+const PwValidity = styled.label`
+  display: ${({length}) => (length > 3 && length <= 20 || length === 0 ? "none" : "block")};
+  color: red;
+  font-size: 0.9rem;
+`
+const Confirm = styled.label`
+  display: ${({length}) => (length[0] === length[1] || length[1] === 0 ? "none" : "block")};
+  color: red;
+  font-size: 0.9rem;
 `
 
 const SignupHeader = styled.div`
@@ -63,7 +123,6 @@ const SignupHeader = styled.div`
   .title {
     font-size: 30px;
     font-weight: 700;
-    margin-left: 3rem;
   }
 `
 

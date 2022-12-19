@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const StForm = (props) => {
-  const { gap, paddingTop, children, alignItem, width } = props;
+  const { gap, paddingTop, children, alignItem, width, onSubmit } = props;
   const styles = { gap, paddingTop, alignItem, width };
 
-  return <Section {...styles}>{children}</Section>;
+  return <Section {...styles} onSubmit={onSubmit}>{children}</Section>;
 };
 
 StForm.defaultProps = {
