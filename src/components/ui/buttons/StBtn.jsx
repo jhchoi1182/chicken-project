@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StBtn = (props) => {
-  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children, margin, type, disabled } = props;
-  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize, margin, type, disabled };
+  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children, margin, type, disabled, hoverColor, hoverBorder } = props;
+  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize, margin, type, disabled, hoverColor, hoverBorder };
 
   return (
     <Button {...styles} onClick={onClick}>
@@ -20,7 +20,8 @@ StBtn.defaultProps = {
   width: "9rem",
   height: "2.5rem",
   type: "button",
-  disabled: false
+  disabled: false,
+  hoverBorder: "2px"
 };
 
 const Button = styled.button.attrs(props => ({
@@ -35,12 +36,9 @@ const Button = styled.button.attrs(props => ({
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   margin: ${(props) => props.margin};
-  :disabled {
-    
-  }
   :hover {
     cursor: pointer;
-    border: ${(props) => props.border} solid ${(props) => props.HoverColor};
+    border: ${(props) => props.hoverBorder} solid ${(props) => props.hoverColor};
   }
   
 `;
