@@ -12,15 +12,16 @@ StInput.defaultProps = {
   borderRadius: "10px",
   fontSize: "15px",
   width: "80%",
+  border: "2px",
   height: "2.5rem",
-  border: "1px",
   type: "text",
-  placeholder: ""
+  placeholder: "",
+  borderColor: "#e67700",
 };
 
-const Input = styled.input.attrs(props => ({
+const Input = styled.input.attrs((props) => ({
   type: props.type,
-  placeholder: props.placeholder
+  placeholder: props.placeholder,
 }))`
   border: ${(props) => props.border} solid ${(props) => props.borderColor};
   font-size: ${(props) => props.fontSize};
@@ -30,10 +31,9 @@ const Input = styled.input.attrs(props => ({
   text-indent: 10px;
   margin: ${(props) => props.margin};
   name: ${(props) => props.name};
-  :required
-  :focus{
-    outline: 2px solid 	#e6d96b;
-    border: 1px solid transparent
+  :focus {
+    outline: 2px solid #e67700;
+    border: 1px solid transparent;
   }
 `;
 

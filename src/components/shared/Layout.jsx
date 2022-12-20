@@ -22,6 +22,7 @@ const TodoBox = styled.div`
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 1px 1px gray;
+  border: 3px solid #e67700;
   padding: 2rem 4rem;
   margin: auto;
 `;
