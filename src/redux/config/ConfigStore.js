@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todos from "../modules/TodoSlice";
-import login from '../modules/LoginSlice'
+import todoReducer from "../modules/TodoSlice";
+import login from "../modules/LoginSlice";
 
 const store = configureStore({
-  reducer: { todos, login },
+  reducer: { todos: todoReducer, login },
 });
 
 export default store;
