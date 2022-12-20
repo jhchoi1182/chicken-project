@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StBtn = (props) => {
-  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children, margin, type, disabled, hoverColor, hoverBorder } = props;
-  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize, margin, type, disabled, hoverColor, hoverBorder };
+  const { border, color, borderColor, fontSize, width, height, borderRadius, backgroundColor, onClick, children, margin, type, disabled, hoverColor, hoverBorder, weight } = props;
+  const styles = { color, border, borderRadius, borderColor, width, height, backgroundColor, fontSize, margin, type, disabled, hoverColor, hoverBorder, weight };
 
   return (
     <Button {...styles} onClick={onClick}>
@@ -16,17 +16,21 @@ StBtn.defaultProps = {
   border: "2px",
   borderRadius: "10px",
   fontSize: "1rem",
-  backgroundColor: "white",
   width: "9rem",
   height: "2.5rem",
   type: "button",
   disabled: false,
-  hoverBorder: "2px"
+  hoverBorder: "3px",
+  borderColor: "#e67700",
+  weight: "700",
+  backgroundColor: "rgba(253, 126, 20, 0.4)",
+  hoverColor: "#e67700",
+  color: "#343a40",
 };
 
-const Button = styled.button.attrs(props => ({
+const Button = styled.button.attrs((props) => ({
   type: props.type,
-  disabled: props.disabled
+  disabled: props.disabled,
 }))`
   border: ${(props) => props.border} solid ${(props) => props.borderColor};
   font-size: ${(props) => props.fontSize};
@@ -36,11 +40,11 @@ const Button = styled.button.attrs(props => ({
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   margin: ${(props) => props.margin};
+  font-weight: ${(props) => props.weight};
   :hover {
     cursor: pointer;
     border: ${(props) => props.hoverBorder} solid ${(props) => props.hoverColor};
   }
-  
 `;
 
 export default StBtn;
