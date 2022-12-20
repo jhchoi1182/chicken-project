@@ -1,16 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import StBtn from "../ui/buttons/StBtn";
 
-const Header = () => {
-  return <Wrap>Header 스타일은 추후 제가 수정할게요</Wrap>;
+const Header = (props) => {
+  const {disply, justifyContent, divWidth, divFont} = props
+  const styles = {disply, justifyContent, divWidth, divFont}
+  console.log(props)
+  return <Wrap {...styles}>화이팅</Wrap>;
 };
 
+Header.defaultProps = {
+
+};
 const Wrap = styled.div`
   width: 100%;
   height: 5rem;
-  display: flex;
-  margin: 0px;
+  display: ${(props) => props.disply};
+  justify-content: ${(props) => props.justifyContent};
 `;
 
 export default Header;
