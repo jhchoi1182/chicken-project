@@ -6,55 +6,57 @@ import Chick from "../shared/Chick";
 import StBtn from "../ui/buttons/StBtn";
 import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
-import login from "../../images/login.webp"
-import lv1 from '../../images/LV1.jpg'
+import login from "../../images/login.webp";
 
 const Login = () => {
   const navigate = useNavigate();
   // const dispatch = useDispatch()
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
-    password: ""
-  })
+    password: "",
+  });
 
   const onChangeHandler = (event) => {
-    const {name, value} = event.target
-    setEnteredInfo({...edteredInfo, [name]: value})
-  }
+    const { name, value } = event.target;
+    setEnteredInfo({ ...edteredInfo, [name]: value });
+  };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
     // dispatch(__login(edteredInfo))
     setEnteredInfo({
       account: "",
-      password: ""  
-    })
+      password: "",
+    });
     // navigate('')
-  }
+  };
 
-  const aLength = edteredInfo.account.length
-  const bLength = edteredInfo.password.length
+  const aLength = edteredInfo.account.length;
+  const bLength = edteredInfo.password.length;
 
   return (
     <section>
       <LoginHeader>Todo</LoginHeader>
-      <Chick src={lv1} />
+      <Chick src={login} />
       <StForm gap="1.5rem" paddingTop="1rem" alignItem="center" onSubmit={onSubmitHandler}>
         <Div>
           <div className="input-box">
             <label>아이디</label>
             <StInput width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="account" value={edteredInfo.account} onChange={onChangeHandler} />
-            <IDValidity length={aLength} >3~15자를 입력해주세요.</IDValidity>
+            <IDValidity length={aLength}>3~15자를 입력해주세요.</IDValidity>
           </div>
           <div className="input-box">
-           <label>비밀번호</label>
-          <StInput type="password" width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="password" value={edteredInfo.password} onChange={onChangeHandler} />
-          <PWValidity length={bLength}>4~20자를 입력해주세요.</PWValidity> 
+            <label>비밀번호</label>
+            <StInput type="password" width="100%" margin="0.3rem 0rem 0.1rem 0rem" name="password" value={edteredInfo.password} onChange={onChangeHandler} />
+            <PWValidity length={bLength}>4~20자를 입력해주세요.</PWValidity>
           </div>
         </Div>
-        <StBtn type="submit" width="82%" margin="0px 0px 0px 3px"
-        disabled={(aLength > 2 && aLength <= 15) && (bLength > 2 && bLength <= 20) ? false : true}>로그인</StBtn>
-        <StBtn width="82%" margin="0px 0px 0px 3px" type="button" onClick={() => navigate('/signup')}>회원가입</StBtn>
+        <StBtn type="submit" width="82%" margin="0px 0px 0px 3px" disabled={aLength > 2 && aLength <= 15 && bLength > 2 && bLength <= 20 ? false : true}>
+          로그인
+        </StBtn>
+        <StBtn width="82%" margin="0px 0px 0px 3px" type="button" onClick={() => navigate("/signup")}>
+          회원가입
+        </StBtn>
       </StForm>
     </section>
   );
@@ -67,12 +69,12 @@ const LoginHeader = styled.div`
   justify-content: center;
   font-size: 30px;
   font-weight: 700;
-`
+`;
 
 const Div = styled.div`
   width: 80%;
   display: block;
-  margin-bottom: -0.3rem;
+  margin-bottom: 1rem;
   .input-box {
     padding: 2px 0px;
     height: 5.7rem;
@@ -80,18 +82,18 @@ const Div = styled.div`
   .input-box:nth-child(2) {
     margin-bottom: -0.5rem;
   }
-`
+`;
 
 const IDValidity = styled.label`
-  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
+  display: ${({ length }) => ((length > 2 && length <= 15) || length === 0 ? "none" : "block")};
   color: red;
   font-size: 0.9rem;
-`
+`;
 
 const PWValidity = styled.label`
-  display: ${({length}) => (length > 2 && length <= 20 || length === 0 ? "none" : "block")};;
+  display: ${({ length }) => ((length > 2 && length <= 20) || length === 0 ? "none" : "block")};
   color: red;
   font-size: 0.9rem;
-`
+`;
 
 export default Login;

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -6,8 +6,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {  
-    background-color: #eee8aa;
+    background-color: white;
+    color: #e67700;
+    font-weight: 600;
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
