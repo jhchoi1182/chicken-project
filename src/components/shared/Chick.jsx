@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import lv1 from '../../images/LV. 1.webp'
 
-const Chick = () => {
+const Chick = (props) => {
+  const {src, width, margin} = props
+  const styles = {src, width, margin}
   return <Box>
-    <Img src={lv1} alt="갓 깨어난 병아리"/>
+    <Img {...styles} alt=""/>
     <label>LV 1. 갓 깨어난 병아리</label>
   </Box>;
 };
@@ -14,14 +15,17 @@ const Box = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100%
   height: 18rem;
   border-radius: 8px;
   margin-bottom: 2rem;
   gap: 1rem;
-`;
+  `
 
 const Img = styled.img`
+  width: 15rem;
+  src: ${(props) => props.src};
+  margin: ${(props) => props.margin};
 `
 
 export default Chick;

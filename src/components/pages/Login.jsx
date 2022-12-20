@@ -6,6 +6,8 @@ import Chick from "../shared/Chick";
 import StBtn from "../ui/buttons/StBtn";
 import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
+import login from "../../images/login.webp"
+import lv1 from '../../images/LV1.jpg'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const Login = () => {
   return (
     <section>
       <LoginHeader>Todo</LoginHeader>
-      <Chick />
+      <Chick src={lv1} />
       <StForm gap="1.5rem" paddingTop="1rem" alignItem="center" onSubmit={onSubmitHandler}>
         <Div>
           <div className="input-box">
