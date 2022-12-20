@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StForm = (props) => {
-  const { gap, paddingTop, children, alignItem, width, onSubmit } = props;
-  const styles = { gap, paddingTop, alignItem, width };
+  const { gap, paddingTop, children, alignItem, width, onSubmit, margin, fontSize } = props;
+  const styles = { gap, paddingTop, alignItem, width, margin, fontSize };
 
   return <Section {...styles} onSubmit={onSubmit}>{children}</Section>;
 };
@@ -23,6 +23,8 @@ const Section = styled.form`
   align-items: ${(props) => props.alignItem};
   gap: ${(props) => props.gap};
   padding-top: ${(props) => props.paddingTop};
+  margin: ${(props) => props.margin};
+  font-size: ${(props) => props.fontSize};
 `;
 
 export default StForm;
