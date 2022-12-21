@@ -7,12 +7,6 @@ const instance = axios.create({
 })
 
 const cookie = new Cookies()
-const getCookie = cookie.get('token')
-instance.interceptors.request.use((config) => {
-  config.headers.authorization = `Bearer ${getCookie}`
-  return config
-}
-)
 
 export const __signUp = createAsyncThunk(
   "SIGNUP_TODO",
@@ -31,16 +25,15 @@ export const __signUp = createAsyncThunk(
       return thunkAPI.fulfillWithValue(register.data.msg)
     } catch (error) {
       const msg = error.response.data.msg
-      if (msg === "REGISTER COMPLETE") {
-        alert('회원가입 성공!')
-      } else if (msg === 'ID ALREADY EXISTS') {
+      console.log(msg)
+      if (msg === 'ID ALREADY EXISTS') {
         alert('아이디가 중복되었습니다.')
       } else if (msg === 'NICKNAME ALREADY EXISTS') {
         alert('닉네임이 중복되었습니다.')
       } else {
         alert('알 수 없는 오류입니다.')
       }
-      return thunkAPI.rejectWithValue(error.response.data.msg)
+      return thunkAPI.rejectWithValue(msg)
     }
   }
 );
