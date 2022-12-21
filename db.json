@@ -1,9 +1,9 @@
 {
-  "posts": [
+  "todos": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "content": "sdfdsff",
+      "id": 769,
+      "isDone": false
     }
   ],
   "comments": [

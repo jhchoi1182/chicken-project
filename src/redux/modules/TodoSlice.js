@@ -16,7 +16,7 @@ export const __getTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const todos = await axios.get("http://localhost:3001/todos");
-      return thunkAPI.fulfillWithValue(todos.data);
+      return thunkAPI.fulfillWithValue([...todos.data]);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -26,8 +26,8 @@ export const __getTodo = createAsyncThunk(
 export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
+      console.log(payload);
       const todo = await axios.post("http://localhost:3001/todos", payload);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
@@ -39,7 +39,6 @@ export const __addTodo = createAsyncThunk(
 export const __isdoneTodo = createAsyncThunk(
   "todos/isdoneTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const todo = await axios.patch(
         `http://localhost:3001/todos/${payload.id}`,
@@ -47,7 +46,6 @@ export const __isdoneTodo = createAsyncThunk(
           isDone: !payload.isDone,
         }
       );
-      console.log(todo);
       return thunkAPI.fulfillWithValue(payload.id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -70,7 +68,6 @@ export const __deleteTodo = createAsyncThunk(
 export const __updateTodo = createAsyncThunk(
   "todos/updateTodo",
   async (payload, thunkAPI) => {
-    // console.log(payload);
     try {
       const todo = await axios.patch(
         `http://localhost:3001/todos/${payload.id}`,
@@ -150,7 +147,6 @@ const todoSlice = createSlice({
     },
     [__isdoneTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
       state.todos = state.todos.map((el) =>
         el.id === action.payload
           ? {

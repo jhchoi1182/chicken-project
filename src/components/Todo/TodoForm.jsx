@@ -12,6 +12,8 @@ const Form = () => {
 
   const addSubmitHandler = (e) => {
     e.preventDefault();
+    console.log("in");
+
     const todo = {
       ...input,
       id: Math.floor(Math.random() * 1000),
@@ -26,7 +28,7 @@ const Form = () => {
   }
 
   return (
-    <CreateForm onSubmit={addSubmitHandler}>
+    <form onSubmit={addSubmitHandler}>
       <InputBox>
         <label>
           <StInput
@@ -39,23 +41,27 @@ const Form = () => {
         </label>
       </InputBox>
       <StButton>추가하기</StButton>
-    </CreateForm>
+    </form>
   );
 };
 
 export default Form;
 
-const CreateForm = styled.form``;
-
 const InputBox = styled.div``;
 
 const StInput = styled.input`
-  width: 400px;
+  width: 330px;
   height: 30px;
   border-radius: 10px;
   border: 1px solid orange;
 `;
 
 const StButton = styled.button`
+  width: 70px;
+  height: 40px;
+  color: orange;
+  position: absolute;
+  left: 500px;
+  top: 430px;
   cursor: pointer;
 `;
