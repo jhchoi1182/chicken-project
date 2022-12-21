@@ -7,7 +7,6 @@ import { useParams } from "react-router";
 import { getPosts, delPost } from "../../redux/modules/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PostDetail from "./PostDetail";
-
 const Posts = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
