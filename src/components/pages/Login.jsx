@@ -7,10 +7,11 @@ import StBtn from "../ui/buttons/StBtn";
 import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
 import login from "../../images/login.webp";
+import { __login } from "../../redux/modules/LoginSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
     password: "",
@@ -23,12 +24,12 @@ const Login = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    // dispatch(__login(edteredInfo))
+    dispatch(__login(edteredInfo));
     setEnteredInfo({
       account: "",
       password: "",
     });
-    // navigate('')
+    // navigate('/')
   };
 
   const aLength = edteredInfo.account.length;

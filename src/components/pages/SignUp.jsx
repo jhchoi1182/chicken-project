@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { __signUp } from "../../redux/modules/LoginSlice";
@@ -12,6 +12,7 @@ import register from '../../images/register.webp'
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const message = useSelector(state => state.login.message)
   const [edteredSignUpInfo, setEnteredSignUpInfo] = useState({
     nickname: "",
     account: "",
@@ -26,16 +27,14 @@ const SignUp = () => {
 
   const onSubmitHandler = () => {
     dispatch(__signUp(edteredSignUpInfo))
-    setEnteredSignUpInfo({
-      nickname: "",
-      account: "",
-      password: "",
-      confirm: ""
-    })
-    // alert("회원가입 성공!")
-    // navigate('/')
-  }
+    }
   
+    useEffect(() => {
+      if (message === "REGISTER COMPLETE") {
+        navigate('/')
+      }
+    }, [message])
+
   const aLength = edteredSignUpInfo.nickname.length
   const bLength = edteredSignUpInfo.account.length
   const cLength = edteredSignUpInfo.password.length
@@ -93,11 +92,10 @@ const Div = styled.div`
 `
 
 const NickValidity = styled.label`
-  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
+  display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")} !important;
   color: red;
   font-size: 0.9rem;
 `
-
 const IdValidity = styled.label`
   display: ${({length}) => (length > 2 && length <= 15 || length === 0 ? "none" : "block")};
   color: red;
