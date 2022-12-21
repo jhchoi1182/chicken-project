@@ -15,7 +15,7 @@ instance.interceptors.request.use((config) => {
 )
 
 export const __signUp = createAsyncThunk(
-  "LOGIN_TODO",
+  "SIGNUP_TODO",
   async (signUpInfo, thunkAPI) => {
     try {
       const register = await instance.post(
@@ -55,23 +55,25 @@ export const __login = createAsyncThunk(
       })
       const accessToken = login.data.accessToken
       cookie.set('token', accessToken)
-
-      return thunkAPI.fulfillWithValue(alert('로그인 성공'))
+      if (login.status === 200) {
+        alert('로그인 성공')
+      }
+      return thunkAPI.fulfillWithValue(login)
     } catch (error) {
       if (error.response.status === 400) {
         alert('일치하는 정보가 없습니다.')
       } else if (error.response.status === 401) {
         alert('아이디 또는 비밀번호가 틀렸습니다')
       }
-      return thunkAPI.rejectWithValue(error.response)
+      return thunkAPI.rejectWithValue(error.response.status)
     }
   }
-)
+);
 
 const initialState = {
-  user: [],
+  userId: "",
   isLoading: false,
-  message: "",
+  status: "",
 };
 
 const loginSlice = createSlice({
@@ -80,29 +82,31 @@ const loginSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      //회원가입
       .addCase(__signUp.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(__signUp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.message = action.payload;
+        state.status = action.payload;
       })
       .addCase(__signUp.rejected, (state, action) => {
         state.isLoading = false;
-        state.message = action.payload;
+        state.status = action.payload;
       })
-    //로그인
-    // .addCase(__login.pending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(__login.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    // })
-    // .addCase(__login.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // })
+
+      .addCase(__login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload)
+        state.userId = action.payload.data.userId
+        state.status = action.payload.status;
+      })
+      .addCase(__login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.status = action.payload;
+      })
   }
 })
 

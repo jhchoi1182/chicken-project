@@ -12,7 +12,7 @@ import register from '../../images/register.webp'
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const message = useSelector(state => state.login.message)
+  const message = useSelector(state => state.login.status)
   const [edteredSignUpInfo, setEnteredSignUpInfo] = useState({
     nickname: "",
     account: "",

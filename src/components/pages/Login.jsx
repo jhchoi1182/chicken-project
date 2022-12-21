@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Chick from "../shared/Chick";
@@ -12,6 +12,7 @@ import { __login } from "../../redux/modules/LoginSlice";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const loginData = useSelector(state => state.login)
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
     password: "",
@@ -25,12 +26,13 @@ const Login = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(__login(edteredInfo));
-    setEnteredInfo({
-      account: "",
-      password: "",
-    });
-    // navigate('/')
   };
+
+  useEffect(() => {
+    if (loginData.status === 200) {
+      navigate(`/todos/${loginData.userId}`)
+    }
+  }, [loginData])
 
   const aLength = edteredInfo.account.length;
   const bLength = edteredInfo.password.length;
