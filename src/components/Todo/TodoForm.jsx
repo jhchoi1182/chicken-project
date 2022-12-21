@@ -42,7 +42,9 @@ const Form = () => {
           placeholder="이곳에 내용을 작성해주세요."
         />
       </InputBox>
-      <AddButton>추가하기</AddButton>
+      <BtnWrap>
+        <AddButton>추가하기</AddButton>
+      </BtnWrap>
     </form>
   );
 };
@@ -62,13 +64,17 @@ const ContentInput = styled.input`
   font-size: 12px;
 `;
 
+const BtnWrap = styled.div`
+  position: static;
+`;
+
 const AddButton = styled.button`
   width: 70px;
   height: 40px;
   color: orange;
-  position: absolute;
-  left: 620px;
-  top: 430px;
-  margin-left: 40px;
+  position: relative;
+  left: 290px;
+  top: -40px;
+  margin-left: 30px;
   cursor: pointer;
 `;

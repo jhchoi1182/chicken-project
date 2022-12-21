@@ -81,7 +81,6 @@ const TitleSpan = styled.div`
   border-radius: 10px;
   font-size: 14px;
   margin-top: 8px;
-
   margin-right: 10px;
 `;
 
@@ -98,6 +97,6 @@ const UpdateBtn = styled.button`
   width: 43px;
   height: 43px;
   margin-top: 8px;
-  border: 1px solid oarnge;
+  /* border: 1px solid orange; */
   color: orange;
 `;
