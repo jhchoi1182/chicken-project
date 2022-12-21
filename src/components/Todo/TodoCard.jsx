@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import {
   __deleteTodo,
@@ -12,11 +12,14 @@ const TodoCard = ({ todo }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const param = useParams();
+
   const [input, setInput] = useState(location.state);
 
   //삭제하는 부분 --
   const deleteHandler = (id) => {
-    dispatch(__deleteTodo(id));
+    // console.log(id);
+    dispatch(__deleteTodo({ userId: param.id, todoId: id }));
   };
 
   //수정하는 부분 ---
@@ -25,18 +28,22 @@ const TodoCard = ({ todo }) => {
   const makeUpdateMode = (id) => {
     setUpdateId(true);
   };
-
+  console.log(input);
   const updateHandler = (id) => {
-    dispatch(__updateTodo({ id, input }));
+    dispatch(__updateTodo({ userId: param.id, todoId: id, content: input }));
     setUpdateId(false);
   };
 
   //완료/취소 부분 ---
   const isDoneHandler = () => {
-    const updateIsDone = { id: todo.id, isDone: todo.isDone };
+    const updateIsDone = {
+      userId: param.id,
+      todoId: todo.todoId,
+      done: todo.done,
+    };
     dispatch(__isdoneTodo(updateIsDone));
   };
-  console.log(todo.content);
+  console.log(todo);
 
   return (
     <CardBox>
@@ -50,15 +57,17 @@ const TodoCard = ({ todo }) => {
       )}
 
       {updateId !== true ? (
-        <UpdateBtn onClick={() => makeUpdateMode(todo.id)}>수정</UpdateBtn>
+        <UpdateBtn onClick={() => makeUpdateMode(todo.todoId)}>수정</UpdateBtn>
       ) : (
         <>
-          <UpdateBtn onClick={() => updateHandler(todo.id)}>수정완료</UpdateBtn>
+          <UpdateBtn onClick={() => updateHandler(todo.todoId)}>
+            수정완료
+          </UpdateBtn>
           <UpdateBtn onClick={() => setUpdateId(false)}>수정취소</UpdateBtn>
         </>
       )}
 
-      <UpdateBtn onClick={() => deleteHandler(todo.id)}>삭제</UpdateBtn>
+      <UpdateBtn onClick={() => deleteHandler(todo.todoId)}>삭제</UpdateBtn>
       <UpdateBtn onClick={isDoneHandler}>
         {todo.isDone ? "취소" : "완료"}
       </UpdateBtn>
