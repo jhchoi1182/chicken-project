@@ -3,16 +3,21 @@ import Chick from "../shared/Chick";
 import Header from "../shared/Header";
 import login from "../../images/login.webp";
 import lv4 from "../../images/LV4.webp";
-import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
+
+//새로 추가한 부분
+import TodoForm from "../Todo/TodoForm";
+import TodoList from "../Todo/TodoList";
 
 const Todos = () => {
   return (
     <div>
       <Header />
       <Chick src={login} />
-      <StForm>
-      </StForm>
+      <div>
+        <TodoForm></TodoForm>
+        <TodoList></TodoList>
+      </div>
     </div>
   );
 };
