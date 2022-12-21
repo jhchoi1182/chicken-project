@@ -36,6 +36,7 @@ const TodoCard = ({ todo }) => {
     const updateIsDone = { id: todo.id, isDone: todo.isDone };
     dispatch(__isdoneTodo(updateIsDone));
   };
+  console.log(todo.content);
 
   return (
     <CardBox>
@@ -44,7 +45,6 @@ const TodoCard = ({ todo }) => {
       ) : (
         <UpdateInput
           value={input ?? todo.content}
-          // value={input == "" ? todo.content : UpdateInput}
           onChange={(e) => setInput(e.target.value)}
         ></UpdateInput>
       )}

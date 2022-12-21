@@ -68,6 +68,7 @@ export const __deleteTodo = createAsyncThunk(
 export const __updateTodo = createAsyncThunk(
   "todos/updateTodo",
   async (payload, thunkAPI) => {
+    console.log(payload.input);
     try {
       const todo = await axios.patch(
         `http://localhost:3001/todos/${payload.id}`,
