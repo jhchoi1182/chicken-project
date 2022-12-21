@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __addTodo } from "../../redux/modules/TodoSlice";
 import { useInput } from "../../hooks/useInput";
+import { useParams } from "react-router";
 
 const Form = () => {
   const { input, handleInput, setInput } = useInput({ content: "" });
@@ -10,13 +11,14 @@ const Form = () => {
 
   const dispatch = useDispatch();
 
+  const param = useParams();
+
   const addSubmitHandler = (e) => {
     e.preventDefault();
 
     const todo = {
-      ...input,
-      id: Math.floor(Math.random() * 1000),
-      isDone: false,
+      userId: param.id,
+      content: input.content,
     };
 
     if (input.content.length === 0) {
