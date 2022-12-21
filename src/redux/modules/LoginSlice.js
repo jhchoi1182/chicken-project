@@ -43,7 +43,7 @@ export const __signUp = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.response.data.msg)
     }
   }
-)
+);
 
 export const __login = createAsyncThunk(
   "LOGIN_TODO",

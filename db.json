@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "content": "12313",
+      "id": 782,
+      "isDone": false
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
