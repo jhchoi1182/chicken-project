@@ -44,6 +44,7 @@ const TodoCard = ({ todo }) => {
       ) : (
         <UpdateInput
           value={input ?? todo.content}
+          // value={input == "" ? todo.content : UpdateInput}
           onChange={(e) => setInput(e.target.value)}
         ></UpdateInput>
       )}
@@ -75,18 +76,21 @@ const CardBox = styled.div`
 
 const TitleSpan = styled.div`
   font-size: 24px;
-  width: 330px;
-  height: 30px;
-  border: 1px solid orange;
+  width: 260px;
+  height: 25px;
   border-radius: 10px;
-  margin-top: 10px;
+  font-size: 14px;
+  margin-top: 8px;
+
+  margin-right: 10px;
 `;
 
 const UpdateInput = styled.input`
-  width: 280px;
+  width: 240px;
   height: 30px;
   border-radius: 10px;
   border: 1px solid oarnge;
+  font-size: 12px;
   margin-top: 10px;
 `;
 

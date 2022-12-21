@@ -12,15 +12,19 @@ const Form = () => {
 
   const addSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("in");
 
     const todo = {
       ...input,
       id: Math.floor(Math.random() * 1000),
       isDone: false,
     };
-    dispatch(__addTodo(todo));
-    setInput({ content: "" });
+
+    if (input.content.length === 0) {
+      alert("내용을 입력해 주세요");
+    } else {
+      dispatch(__addTodo(todo));
+      setInput({ content: "" });
+    }
   };
 
   if (isLoading) {
@@ -30,38 +34,41 @@ const Form = () => {
   return (
     <form onSubmit={addSubmitHandler}>
       <InputBox>
-        <label>
-          <ContentInput
-            type="text"
-            name="content"
-            value={input.content}
-            onChange={(e) => handleInput(e)}
-            placeholder="이곳에 내용을 작성해주세요."
-          />
-        </label>
+        <ContentInput
+          type="text"
+          name="content"
+          value={input.content}
+          onChange={(e) => handleInput(e)}
+          placeholder="이곳에 내용을 작성해주세요."
+        />
       </InputBox>
-      <StButton>추가하기</StButton>
+      <AddButton>추가하기</AddButton>
     </form>
   );
 };
 
 export default Form;
 
-const InputBox = styled.div``;
-
-const ContentInput = styled.input`
-  width: 330px;
-  height: 35px;
-  border-radius: 10px;
-  border: 1px solid orange;
+const InputBox = styled.div`
+  width: 400px;
+  height: 40px;
 `;
 
-const StButton = styled.button`
+const ContentInput = styled.input`
+  width: 300px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid red;
+  font-size: 12px;
+`;
+
+const AddButton = styled.button`
   width: 70px;
   height: 40px;
   color: orange;
   position: absolute;
-  left: 500px;
+  left: 620px;
   top: 430px;
+  margin-left: 40px;
   cursor: pointer;
 `;

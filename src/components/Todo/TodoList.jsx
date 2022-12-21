@@ -19,7 +19,7 @@ const TodoList = () => {
     <ListWrap>
       <BoxWrap>
         {todos?.map((todo, i) => (
-          <TodoCard key={`card${i}`} todo={todo} />
+          <TodoCard key={`todo${i}`} todo={todo} />
         ))}
       </BoxWrap>
     </ListWrap>
@@ -31,6 +31,7 @@ export default TodoList;
 const ListWrap = styled.div``;
 
 const BoxWrap = styled.div`
-  width: 400px;
-  height: 30px;
+  width: 500px;
+  height: 330px;
+  overflow-y: auto;
 `;
