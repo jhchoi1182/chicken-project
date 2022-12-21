@@ -1,5 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Cookies } from "react-cookie";
+
+const instance = axios.create({
+  baseURL: "http://13.125.129.177"
+})
+
+const cookie = new Cookies()
+const getCookie = cookie.get('token')
+instance.interceptors.request.use((config) => {
+  config.headers.authorization = `Bearer ${getCookie}`
+  return config
+}
+)
 
 const initialState = {
   todos: [],
@@ -15,7 +28,7 @@ export const __getTodo = createAsyncThunk(
   "todos/getTodos",
   async (payload, thunkAPI) => {
     try {
-      const todos = await axios.get("http://localhost:3001/todos");
+      const todos = await instance.get("/todos");
       return thunkAPI.fulfillWithValue([...todos.data]);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -28,7 +41,7 @@ export const __addTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const todo = await axios.post("http://localhost:3001/todos", payload);
+      const todo = await instance.post("/todos", payload);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,8 +53,8 @@ export const __isdoneTodo = createAsyncThunk(
   "todos/isdoneTodo",
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.patch(
-        `http://localhost:3001/todos/${payload.id}`,
+      const todo = await instance.patch(
+        `/todos/${payload.id}`,
         {
           isDone: !payload.isDone,
         }
@@ -57,7 +70,7 @@ export const __deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, thunkAPI) => {
     try {
-      const todo = await axios.delete(`http://localhost:3001/todos/${id}`);
+      const todo = await instance.delete(`/todos/${id}`);
       return thunkAPI.fulfillWithValue(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -70,8 +83,8 @@ export const __updateTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload.input);
     try {
-      const todo = await axios.patch(
-        `http://localhost:3001/todos/${payload.id}`,
+      const todo = await instance.patch(
+        `/todos/${payload.id}`,
         { content: payload.input }
       );
       return thunkAPI.fulfillWithValue(todo.data);
@@ -151,9 +164,9 @@ const todoSlice = createSlice({
       state.todos = state.todos.map((el) =>
         el.id === action.payload
           ? {
-              ...el,
-              isDone: !el.isDone,
-            }
+            ...el,
+            isDone: !el.isDone,
+          }
           : el
       );
     },

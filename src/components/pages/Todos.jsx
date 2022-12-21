@@ -10,6 +10,8 @@ import TodoForm from "../Todo/TodoForm";
 import TodoList from "../Todo/TodoList";
 
 const Todos = () => {
+
+  console.log(document.cookie)
   return (
     <div>
       <Header />
