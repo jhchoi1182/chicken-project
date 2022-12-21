@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import TodoCard from "./TodoCard";
 import { __getTodo } from "../../redux/modules/TodoSlice";
+import { useParams } from "react-router";
 
 const TodoList = () => {
   const dispatch = useDispatch();
   const { isLoading, todos } = useSelector((state) => state.todos);
+
+  const param = useParams();
+  console.log(param);
+
   useEffect(() => {
-    dispatch(__getTodo());
+    dispatch(__getTodo(param.id));
   }, [dispatch]);
 
   if (isLoading) {
