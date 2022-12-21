@@ -31,7 +31,7 @@ const Form = () => {
     <form onSubmit={addSubmitHandler}>
       <InputBox>
         <label>
-          <StInput
+          <ContentInput
             type="text"
             name="content"
             value={input.content}
@@ -49,9 +49,9 @@ export default Form;
 
 const InputBox = styled.div``;
 
-const StInput = styled.input`
+const ContentInput = styled.input`
   width: 330px;
-  height: 30px;
+  height: 35px;
   border-radius: 10px;
   border: 1px solid orange;
 `;

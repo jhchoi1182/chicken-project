@@ -49,16 +49,18 @@ const TodoCard = ({ todo }) => {
       )}
 
       {updateId !== true ? (
-        <button onClick={() => makeUpdateMode(todo.id)}>수정</button>
+        <UpdateBtn onClick={() => makeUpdateMode(todo.id)}>수정</UpdateBtn>
       ) : (
         <>
-          <button onClick={() => updateHandler(todo.id)}>수정완료</button>
-          <button onClick={() => setUpdateId(false)}>수정취소</button>
+          <UpdateBtn onClick={() => updateHandler(todo.id)}>수정완료</UpdateBtn>
+          <UpdateBtn onClick={() => setUpdateId(false)}>수정취소</UpdateBtn>
         </>
       )}
 
-      <button onClick={() => deleteHandler(todo.id)}>삭제</button>
-      <button onClick={isDoneHandler}>{todo.isDone ? "취소" : "완료"}</button>
+      <UpdateBtn onClick={() => deleteHandler(todo.id)}>삭제</UpdateBtn>
+      <UpdateBtn onClick={isDoneHandler}>
+        {todo.isDone ? "취소" : "완료"}
+      </UpdateBtn>
     </CardBox>
   );
 };
@@ -68,22 +70,30 @@ export default TodoCard;
 const CardBox = styled.div`
   display: flex;
   width: 500px;
-  height: 200px;
+  height: 48px;
 `;
 
 const TitleSpan = styled.div`
   font-size: 24px;
-  width: 350px;
+  width: 330px;
   height: 30px;
-  border: 1px solid blue;
+  border: 1px solid orange;
   border-radius: 10px;
   margin-top: 10px;
 `;
 
 const UpdateInput = styled.input`
-  width: 440px;
+  width: 280px;
   height: 30px;
   border-radius: 10px;
   border: 1px solid oarnge;
   margin-top: 10px;
+`;
+
+const UpdateBtn = styled.button`
+  width: 43px;
+  height: 43px;
+  margin-top: 8px;
+  border: 1px solid oarnge;
+  color: orange;
 `;
