@@ -17,9 +17,6 @@ const Chick = (props) => {
   const { src, width, margin } = props;
   const styles = { src, width, margin };
   
-  useEffect(()=> {
-  },[user.userLevel])
-
   return (
     <Box>
       <Img {...styles} src={chickImg[user.userLevel-1]} alt="" />

@@ -33,7 +33,6 @@ const Header = (props) => {
     }
   }, [isCookie])
 
-  console.log(user.userid);
   const { disply, justifyContent, divWidth, divFont } = props;
   const styles = { disply, justifyContent, divWidth, divFont };
   return <Wrap {...styles}>
