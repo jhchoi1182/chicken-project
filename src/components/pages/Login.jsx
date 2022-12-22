@@ -7,11 +7,14 @@ import StBtn from "../ui/buttons/StBtn";
 import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
 import login from "../../images/login.webp";
-import { __login } from "../../redux/modules/LoginSlice";
+import { tokenHandler, __login } from "../../redux/modules/LoginSlice";
+import { Cookies } from "react-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const cookie = new Cookies()
+  const isCookie = cookie.get("token")
   const loginData = useSelector(state => state.login)
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
@@ -29,6 +32,8 @@ const Login = () => {
   };
 
   useEffect(() => {
+    cookie.remove('token', { path: '/' })
+    dispatch(tokenHandler(loginData.userId))
     if (loginData.status === 200) {
       navigate(`/todos/${loginData.userId}`)
     }

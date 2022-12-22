@@ -14,7 +14,6 @@ const Chick = (props) => {
   const egg = "알 수 없는 알"
   const lvText = ["LV 1. 갓 깨어난 병아리", "LV 2. 자는 게 일인 병아리", "LV 3. 한창 먹을 나이인 병아리", "LV 4. 노력하는 병아리", "LV 5. 여유만만한 병아리"]
   const chickImg = [lv1, lv2, lv3, lv4, lv5]
-  console.log(user.userLevel)
   const { src, width, margin } = props;
   const styles = { src, width, margin };
   return (

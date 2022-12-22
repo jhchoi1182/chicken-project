@@ -13,6 +13,7 @@ const Header = (props) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector(state => state.login.user)
+  const tokenId = useSelector(state => state)
   const [loginState, setLoginState] = useState(false)
   const param = useParams().id
   const deleteTokenHandler = () => {
@@ -21,8 +22,6 @@ const Header = (props) => {
     alert('로그아웃되었습니다.')
     navigate('/')
   }
-  console.log(user)
-  console.log(param);
   useEffect(() => {
     dispatch(__userInfo(param))
     if (isCookie) {
@@ -32,6 +31,7 @@ const Header = (props) => {
     }
   }, [isCookie])
 
+  console.log(tokenId);
   const { disply, justifyContent, divWidth, divFont } = props;
   const styles = { disply, justifyContent, divWidth, divFont };
   return <Wrap {...styles}>
