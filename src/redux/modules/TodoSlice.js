@@ -8,10 +8,6 @@ const instance = axios.create({
 
 const cookie = new Cookies();
 const getCookie = cookie.get("token");
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 instance.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${getCookie}`;
   return config;
@@ -169,9 +165,9 @@ const todoSlice = createSlice({
       state.todos = state.todos.map((el) =>
         el.id === action.payload
           ? {
-            ...el,
-            isDone: !el.isDone,
-          }
+              ...el,
+              isDone: !el.isDone,
+            }
           : el
       );
     },
