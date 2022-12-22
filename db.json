@@ -1,24 +1,5 @@
 {
   "todos": [
-    {
-      "content": "123",
-      "id": 936,
-      "isDone": false
-    },
-    {
-      "content": "232",
-      "id": 176,
-      "isDone": false
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+
+  ]
 }
