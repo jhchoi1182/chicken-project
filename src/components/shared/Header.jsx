@@ -21,7 +21,8 @@ const Header = (props) => {
     alert('로그아웃되었습니다.')
     navigate('/')
   }
-
+  console.log(user)
+  console.log(param);
   useEffect(() => {
     dispatch(__userInfo(param))
     if (isCookie) {

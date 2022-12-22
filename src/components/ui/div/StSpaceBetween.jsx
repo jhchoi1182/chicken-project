@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StSpaceBetween = (props) => {
-  const {width, children, justifyContent} = props
-  const styles = {width, children, justifyContent}
+  const {width, children, justifyContent, marginBottom} = props
+  const styles = {width, children, justifyContent, marginBottom}
 
   return (
     <Div {...styles}>{children}</Div>
@@ -20,6 +20,7 @@ const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${(props) => props.justifyContent};
+  margin-bottom: ${(props) => props.marginBottom};;
   `
 
 export default StSpaceBetween
