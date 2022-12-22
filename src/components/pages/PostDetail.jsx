@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StBtn from "../ui/buttons/StBtn";
-import { addPost, getPost } from "../../redux/modules/postsSlice";
+import { addPost, getPost, updatePost } from "../../redux/modules/postsSlice";
 import { useParams } from "react-router";
 
 const PostDetail = ({ btnText, postId, mode, setMode }) => {
@@ -11,10 +11,17 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const { post } = useSelector((state) => state.posts.post);
-  console.log(post);
-  // const reTitle = post.title ?? "fff";
-  // console.log(reTitle);
+  const postData = useSelector((state) => state.posts);
+  const post = postData.post?.post;
+
+  const updateClickHandler = () => {
+    dispatch(updatePost({ title, content, id, postId: post.postId }));
+    setMode(null);
+  };
+  useEffect(() => {
+    setTitle(post?.title);
+    setContent(post?.content);
+  }, [postData.isLoading]);
 
   useEffect(() => {
     dispatch(getPost({ id, postId }));
@@ -99,7 +106,7 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
               <input
                 name="title"
                 onChange={titleChangeHandler}
-                value={""}
+                value={title}
                 placeholder="제목을 작성해주세요"
                 required
                 style={{
@@ -131,7 +138,7 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
               <StBtn
                 margin={"0 18px 10px 18px"}
                 width={"91%"}
-                onClick={createClickHandler}
+                onClick={updateClickHandler}
               >
                 수정완료
               </StBtn>

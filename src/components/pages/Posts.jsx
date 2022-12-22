@@ -79,11 +79,9 @@ const Posts = () => {
             >
               {posts.map((post) => {
                 return (
-                  <div key={post.id}>
+                  <div key={post.postId}>
                     <div style={{ display: "flex" }}>
-                      <div key={post.postId} style={{ marginBottom: "5px" }}>
-                        {post.title}
-                      </div>
+                      <div style={{ marginBottom: "5px" }}>{post.title}</div>
                       <StBtn
                         width={"3rem"}
                         height={"1.3rem"}

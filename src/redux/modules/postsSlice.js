@@ -33,7 +33,31 @@ export const delPost = createAsyncThunk(
     } catch (error) {}
   }
 );
-
+//updatePost
+export const updatePost = createAsyncThunk(
+  "postsSlice/updatePost",
+  async ({ id, postId, title, content }) => {
+    const headers = {
+      authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3MTYwNTIwNCwiZXhwIjoxNjcxNjkxNjA0fQ.CKrZWgUO4JpEOE3r7UkL4C2Bs9URVoxqschGUtwri7o",
+    };
+    try {
+      const res = await axios.patch(
+        `http://13.125.129.177/post/${id.id}/${postId}`,
+        {
+          title,
+          content,
+        },
+        {
+          headers: headers,
+        }
+      );
+      const data = await instance.get(`/post/${id.id}`);
+      const result = data.data;
+      return result;
+    } catch (error) {}
+  }
+);
 //getPost
 export const getPost = createAsyncThunk(
   "postsSlice/getPost",
@@ -95,6 +119,15 @@ const postsSlice = createSlice({
   name: "postsSlice",
   initialState,
   extraReducers: {
+    //updatePost
+    [updatePost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updatePost.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.errorCurse = false;
+      state.posts = payload;
+    },
     //getPost
     [getPost.pending]: (state) => {
       state.isLoading = true;
