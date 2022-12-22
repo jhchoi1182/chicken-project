@@ -42,7 +42,6 @@ const TodoCard = ({ todo }) => {
     };
     dispatch(__isdoneTodo(updateIsDone));
   };
-  // console.log(todo);
 
   return (
     <CardBox>

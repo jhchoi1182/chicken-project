@@ -40,10 +40,13 @@ export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
     try {
-      const todo = await instance.post(`/todo/${payload.userId}`, {
-        content: payload.content,
+      const todo = await instance.post(`/todo/${payload.todo.userId}`, {
+        content: payload.todo.content,
       });
-      return thunkAPI.fulfillWithValue(payload.content);
+      if (todo.status === 200) {
+        const result = await instance.get(`/todo/${payload.id}`);
+        return thunkAPI.fulfillWithValue(result.data);
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -57,7 +60,6 @@ export const __isdoneTodo = createAsyncThunk(
       const todo = await instance.patch(
         `/todo/${payload.userId}/${payload.todoId}?done=${!payload.done}`
       );
-      console.log(payload.todoId);
       return thunkAPI.fulfillWithValue(payload.id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -117,7 +119,7 @@ const todoSlice = createSlice({
     },
     [__addTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.todos = [...state.todos, action.payload];
+      state.todos = [...action.payload.Todos];
     },
     [__addTodo.rejected]: (state, action) => {
       state.isLoading = false;
