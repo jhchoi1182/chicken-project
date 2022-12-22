@@ -12,7 +12,7 @@ const Form = () => {
   const dispatch = useDispatch();
 
   const param = useParams();
-
+  console.log(param);
   const addSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -24,7 +24,7 @@ const Form = () => {
     if (input.content.length === 0) {
       alert("내용을 입력해 주세요");
     } else {
-      dispatch(__addTodo(todo));
+      dispatch(__addTodo({ todo: todo, id: param.id }));
       setInput({ content: "" });
     }
   };

@@ -8,12 +8,11 @@ import { useParams } from "react-router";
 const TodoList = () => {
   const dispatch = useDispatch();
   const { isLoading, todos } = useSelector((state) => state.todos);
-
   const param = useParams();
 
   useEffect(() => {
-    dispatch(__getTodo(param.id));
-  }, [dispatch]);
+    dispatch(__getTodo(param.id)).then((res) => {});
+  }, []);
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -22,9 +21,9 @@ const TodoList = () => {
   return (
     <ListWrap>
       <BoxWrap>
-        {todos?.map((todo, i) => (
-          <TodoCard key={`todo${i}`} todo={todo} />
-        ))}
+        {todos?.map((todo, i) => {
+          return <TodoCard key={`todo${i}`} todo={todo} />;
+        })}
       </BoxWrap>
     </ListWrap>
   );
