@@ -13,11 +13,20 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
 
   const postData = useSelector((state) => state.posts);
   const post = postData.post?.post;
+  const [inputDis, setInputDis] = useState(true);
 
-  const updateClickHandler = () => {
-    dispatch(updatePost({ title, content, id, postId: post.postId }));
-    setMode(null);
+  const inputModeHandler = () => {
+    if (inputDis) {
+      console.log(1); //작성됨
+      setInputDis(!inputDis);
+    } else {
+      //input 작성안됨
+      dispatch(updatePost({ title, content, id, postId: post.postId }));
+      setInputDis(!inputDis);
+      setMode(null);
+    }
   };
+
   useEffect(() => {
     setTitle(post?.title);
     setContent(post?.content);
@@ -97,53 +106,100 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
               </StBtn>
             </div>
           </form>
-        ) : mode === "update" ? (
-          <form
-            onSubmit={(event) => event.preventDefault()}
-            style={{ border: "2px solid #e67700" }}
-          >
-            <div>
-              <input
-                name="title"
-                onChange={titleChangeHandler}
-                value={title}
-                placeholder="제목을 작성해주세요"
-                required
-                style={{
-                  border: "2px solid #e67700",
-                  width: "22rem",
-                  height: "2rem",
-                  borderRadius: "10px",
-                  margin: "20px 0px 20px 18px",
-                }}
-              />
-            </div>
-            <div>
-              <input
-                name="content"
-                onChange={contentChangeHandler}
-                value={content}
-                placeholder="내용을 입력해주세요"
-                required
-                style={{
-                  border: "2px solid #e67700",
-                  width: "22rem",
-                  height: "2rem",
-                  borderRadius: "10px",
-                  margin: "0px 0px 20px 18px",
-                }}
-              />
-            </div>
-            <div>
-              <StBtn
+        ) : mode === "detail" ? (
+          <div>
+            <form
+              onSubmit={(event) => event.preventDefault()}
+              style={{ border: "2px solid #e67700" }}
+            >
+              <div>
+                <input
+                  readOnly={inputDis}
+                  name="title"
+                  onChange={titleChangeHandler}
+                  value={title}
+                  placeholder="제목을 작성해주세요"
+                  required
+                  style={{
+                    border: "2px solid #e67700",
+                    width: "22rem",
+                    height: "2rem",
+                    borderRadius: "10px",
+                    margin: "20px 0px 20px 18px",
+                  }}
+                />
+              </div>
+              <div>
+                <input
+                  readOnly={inputDis}
+                  name="content"
+                  onChange={contentChangeHandler}
+                  value={content}
+                  placeholder="내용을 입력해주세요"
+                  required
+                  style={{
+                    border: "2px solid #e67700",
+                    width: "22rem",
+                    height: "2rem",
+                    borderRadius: "10px",
+                    margin: "0px 0px 20px 18px",
+                  }}
+                />
+              </div>
+              <div>
+                <StBtn
+                  style={{ color: "#e67700" }}
+                  margin={"0 18px 10px 18px"}
+                  width={"91%"}
+                  onClick={inputModeHandler}
+                >
+                  수정
+                </StBtn>
+                {/* <StBtn
+                margin={"0 18px 10px 18px"}
+                width={"91%"}
+                onClick={updateClickHandler}
+              >
+                수정
+              </StBtn> */}
+                {/* <StBtn
                 margin={"0 18px 10px 18px"}
                 width={"91%"}
                 onClick={updateClickHandler}
               >
                 수정완료
-              </StBtn>
+              </StBtn> */}
+              </div>
+            </form>
+            <div>
+              <div>
+                <ul>
+                  <li>gggg</li>
+                </ul>
+              </div>
+              <div>
+                <form style={{ display: "flex" }}>
+                  <input
+                    style={{
+                      height: "1.3rem",
+                      border: "2px solid #e67700",
+                      borderRadius: "5px",
+                      width: "70%",
+                      margin: "10px",
+                    }}
+                  />
+                  <StBtn
+                    width={"5rem"}
+                    height={"1.8rem"}
+                    margin={"9px"}
+                    color={"#e67700"}
+                  >
+                    댓글추가
+                  </StBtn>
+                </form>
+              </div>
             </div>
-          </form>
+          </div>
         ) : (
           <></>
         )}

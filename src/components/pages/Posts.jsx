@@ -22,7 +22,6 @@ const Posts = () => {
     };
     dispatch(delPost(deldata));
   };
-
   const updateClickHandler = (postId) => {
     setPostId(postId);
   };
@@ -81,8 +80,16 @@ const Posts = () => {
                 return (
                   <div key={post.postId}>
                     <div style={{ display: "flex" }}>
-                      <div style={{ marginBottom: "5px" }}>{post.title}</div>
-                      <StBtn
+                      <div
+                        style={{ marginBottom: "5px" }}
+                        onClick={() => {
+                          setMode("detail");
+                          updateClickHandler(post.postId);
+                        }}
+                      >
+                        {post.title}
+                      </div>
+                      {/* <StBtn
                         width={"3rem"}
                         height={"1.3rem"}
                         margin={"0 2px"}
@@ -94,7 +101,7 @@ const Posts = () => {
                         }}
                       >
                         수정
-                      </StBtn>
+                      </StBtn> */}
                       <StBtn
                         width={"3rem"}
                         height={"1.3rem"}

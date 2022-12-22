@@ -5,7 +5,6 @@ import Login from "../../components/pages/Login";
 import Todos from "../../components/pages/Todos";
 import Neighborhood from "../../components/pages/Neighborhood";
 import Posts from "../pages/Posts";
-import Detail from "../pages/Detail";
 import SignUp from "../pages/SignUp";
 import PostDetail from "../pages/PostDetail";
 const Router = () => {
@@ -17,7 +16,8 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/todos" element={<Todos />} />
           <Route path="/post/:id" element={<Posts />} />
-          {/* <Route path="/post_detail/:id" element={<PostDetail />} /> */}
+          <Route path="comments" element={<PostDetail />} />
+
           <Route path="/neighborhood" element={<Neighborhood />} />
         </Routes>
       </Layout>
