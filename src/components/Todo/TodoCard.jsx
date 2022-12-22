@@ -18,7 +18,6 @@ const TodoCard = ({ todo }) => {
 
   //삭제하는 부분 --
   const deleteHandler = (id) => {
-    // console.log(id);
     dispatch(__deleteTodo({ userId: param.id, todoId: id }));
   };
 
@@ -28,7 +27,7 @@ const TodoCard = ({ todo }) => {
   const makeUpdateMode = (id) => {
     setUpdateId(true);
   };
-  console.log(input);
+
   const updateHandler = (id) => {
     dispatch(__updateTodo({ userId: param.id, todoId: id, content: input }));
     setUpdateId(false);
@@ -43,7 +42,7 @@ const TodoCard = ({ todo }) => {
     };
     dispatch(__isdoneTodo(updateIsDone));
   };
-  console.log(todo);
+  // console.log(todo);
 
   return (
     <CardBox>

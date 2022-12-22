@@ -13,8 +13,11 @@ const TodoList = () => {
   console.log(param);
 
   useEffect(() => {
-    dispatch(__getTodo(param.id));
-  }, [dispatch]);
+    dispatch(__getTodo(param.id)).then((res) => {
+      console.log(res);
+    });
+  }, []);
+  console.log(todos);
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -23,9 +26,10 @@ const TodoList = () => {
   return (
     <ListWrap>
       <BoxWrap>
-        {todos?.map((todo, i) => (
-          <TodoCard key={`todo${i}`} todo={todo} />
-        ))}
+        {todos?.map((todo, i) => {
+          // console.log(todo);
+          return <TodoCard key={`todo${i}`} todo={todo} />;
+        })}
       </BoxWrap>
     </ListWrap>
   );

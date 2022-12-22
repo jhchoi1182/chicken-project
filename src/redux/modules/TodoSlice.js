@@ -8,9 +8,8 @@ const instance = axios.create({
 
 const cookie = new Cookies();
 const getCookie = cookie.get("token");
-// console.log(getCookie);
+
 instance.interceptors.request.use((config) => {
-  // console.log(getCookie);
   config.headers.authorization = `Bearer ${getCookie}`;
   return config;
 });
@@ -30,7 +29,6 @@ export const __getTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const todos = await instance.get(`/todo/${payload}`);
-      // console.log(payload.todos);
       return thunkAPI.fulfillWithValue(todos.data.Todos);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -41,12 +39,10 @@ export const __getTodo = createAsyncThunk(
 export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
-    // console.log(payload);
     try {
       const todo = await instance.post(`/todo/${payload.userId}`, {
         content: payload.content,
       });
-      // console.log(todo);
       return thunkAPI.fulfillWithValue(payload.content);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -57,14 +53,11 @@ export const __addTodo = createAsyncThunk(
 export const __isdoneTodo = createAsyncThunk(
   "todos/isdoneTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const todo = await instance.patch(
         `/todo/${payload.userId}/${payload.todoId}?done=${!payload.done}`
-        // {
-        //   done: !payload.done,
-        // }
       );
+      console.log(payload.todoId);
       return thunkAPI.fulfillWithValue(payload.id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -76,7 +69,6 @@ export const __deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, thunkAPI) => {
     try {
-      console.log(id);
       const todo = await instance.delete(`/todo/${id.userId}/${id.todoId}`);
       return thunkAPI.fulfillWithValue(id.todoId);
     } catch (err) {
@@ -88,7 +80,6 @@ export const __deleteTodo = createAsyncThunk(
 export const __updateTodo = createAsyncThunk(
   "todos/updateTodo",
   async (payload, thunkAPI) => {
-    console.log(payload.content);
     try {
       const todo = await instance.patch(
         `/todo/${payload.userId}/${payload.todoId}`,
@@ -126,8 +117,6 @@ const todoSlice = createSlice({
     },
     [__addTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
-      console.log(state.todos);
       state.todos = [...state.todos, action.payload];
     },
     [__addTodo.rejected]: (state, action) => {
@@ -140,7 +129,6 @@ const todoSlice = createSlice({
     },
     [__deleteTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
       state.todos = state.todos.filter((value) => {
         return value.id !== action.payload;
       });
