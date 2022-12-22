@@ -16,12 +16,14 @@ const Header = (props) => {
   const tokenId = useSelector(state => state)
   const [loginState, setLoginState] = useState(false)
   const param = useParams().id
+
   const deleteTokenHandler = () => {
     cookie.remove('token', { path: '/' })
     setLoginState((false))
     alert('로그아웃되었습니다.')
     navigate('/')
   }
+
   useEffect(() => {
     dispatch(__userInfo(param))
     if (isCookie) {
@@ -36,7 +38,8 @@ const Header = (props) => {
   const styles = { disply, justifyContent, divWidth, divFont };
   return <Wrap {...styles}>
     <div className="loginInfo">
-      {loginState ? <label>{`${user.nickname} 님`}</label> : null}
+      <Button onClick={() => navigate(`/todos/${user.userid}`)}>내 둥지</Button>
+      {tokenId.login.tokenId === user.userid ? <label>{`${user.nickname} 님`}</label> : null}
       {loginState ? <StBtn width="5.5rem" onClick={deleteTokenHandler}>로그아웃</StBtn> : <StBtn width="5.5rem" onClick={() => navigate('/')}>로그인</StBtn>}
     </div>
     <label className="pageInfo">{`${user.nickname} 님의 둥지`}</label>
@@ -60,5 +63,13 @@ const Wrap = styled.div`
     top: 40%;
   }
 `;
+
+const Button = styled.button`
+  position: relative;
+  left: -170%;
+  background-color: rgba(253, 126, 20, 0.4);
+  border: 2px solid #e67700;
+  border-radius: 6px;
+`
 
 export default Header;

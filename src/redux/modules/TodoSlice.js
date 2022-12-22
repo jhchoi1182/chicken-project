@@ -3,7 +3,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const instance = axios.create({
-  baseURL: "http://13.125.129.177",
+  baseURL: "https://sparta-syk.site/",
 });
 
 const cookie = new Cookies();
@@ -165,9 +165,9 @@ const todoSlice = createSlice({
       state.todos = state.todos.map((el) =>
         el.id === action.payload
           ? {
-              ...el,
-              isDone: !el.isDone,
-            }
+            ...el,
+            isDone: !el.isDone,
+          }
           : el
       );
     },
