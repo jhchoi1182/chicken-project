@@ -119,12 +119,18 @@ const initialState = {
   neighbor: [],
   isLoading: false,
   status: "",
+  tokenId: ""
 };
 
 const loginSlice = createSlice({
   name: "login",
   initialState,
-  reducers: {},
+  reducers: {
+    tokenHandler: (state, action) => {
+      console.log(action.payload)
+      state.tokenId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(__signUp.pending, (state) => {
@@ -178,5 +184,7 @@ const loginSlice = createSlice({
       })
   },
 });
+
+export const { tokenHandler } = loginSlice.actions;
 
 export default loginSlice.reducer;
