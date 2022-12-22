@@ -41,7 +41,7 @@ const Posts = () => {
       <PostDetail postId={postId} mode={mode} setMode={setMode} />
 
       <Header />
-      <Chick src={lv3} />
+      <Chick />
       <StSpaceBetween>
         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${id}`)}>
           todo

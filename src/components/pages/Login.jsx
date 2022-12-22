@@ -8,13 +8,10 @@ import StForm from "../ui/div/StForm";
 import StInput from "../ui/inputs/StInput";
 import login from "../../images/login.webp";
 import { tokenHandler, __login } from "../../redux/modules/LoginSlice";
-import { Cookies } from "react-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const cookie = new Cookies()
-  const isCookie = cookie.get("token")
   const loginData = useSelector(state => state.login)
   const [edteredInfo, setEnteredInfo] = useState({
     account: "",
@@ -32,12 +29,13 @@ const Login = () => {
   };
 
   useEffect(() => {
-    cookie.remove('token', { path: '/' })
     dispatch(tokenHandler(loginData.userId))
     if (loginData.status === 200) {
       navigate(`/todos/${loginData.userId}`)
     }
   }, [loginData])
+
+ 
 
   const aLength = edteredInfo.account.length;
   const bLength = edteredInfo.password.length;
@@ -45,7 +43,9 @@ const Login = () => {
   return (
     <section>
       <LoginHeader>Todo</LoginHeader>
-      <Chick src={login} />
+      <Box>
+        <Img src={login} />
+      </Box>
       <StForm gap="1.5rem" paddingTop="1rem" alignItem="center" onSubmit={onSubmitHandler}>
         <Div>
           <div className="input-box">
@@ -102,6 +102,28 @@ const PWValidity = styled.label`
   display: ${({ length }) => ((length > 2 && length <= 20) || length === 0 ? "none" : "block")};
   color: red;
   font-size: 0.9rem;
+`;
+
+const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 19rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  border: 2px solid #e67700;
+  margin-top: -1rem;
+  z-index: 15;
+  gap: 1rem;
+`;
+
+const Img = styled.img`
+  width: 20rem;
+  src: ${(props) => props.src};
+  margin: ${(props) => props.margin};
+  margin-top: -1.5rem;
 `;
 
 export default Login;

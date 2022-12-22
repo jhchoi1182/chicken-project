@@ -19,7 +19,7 @@ const Todos = () => {
   return (
     <div>
       <Header />
-      <Chick src={lv4} />
+      <Chick />
       <div>
       <StSpaceBetween marginBottom="1rem">
         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${param}`)}>

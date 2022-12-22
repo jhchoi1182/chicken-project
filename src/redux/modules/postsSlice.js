@@ -3,7 +3,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const instance = axios.create({
-  baseURL: "http://13.125.129.177",
+  baseURL: "https://sparta-syk.site/",
 });
 
 const cookie = new Cookies()
@@ -27,8 +27,8 @@ export const delPost = createAsyncThunk(
   "postsSlice/delPost",
   async ({ postId, id }, thunkAPI) => {
     try {
-      const res = await axios.delete(
-        `http://13.125.129.177/post/${id}/${postId}`);
+      const res = await instance.delete(
+        `/post/${id}/${postId}`);
       const data = await instance.get(`/post/${id}`);
       const result = data.data;
       return result;
@@ -40,8 +40,8 @@ export const updatePost = createAsyncThunk(
   "postsSlice/updatePost",
   async ({ id, postId, title, content }) => {
     try {
-      const res = await axios.patch(
-        `http://13.125.129.177/post/${id.id}/${postId}`,
+      const res = await instance.patch(
+        `/post/${id.id}/${postId}`,
         {
           title,
           content,
@@ -68,8 +68,8 @@ export const addPost = createAsyncThunk(
   "postsSlice/addPost",
   async ({ title, content, id }, thunkAPI) => {
     try {
-      const res = await axios.post(
-        `http://13.125.129.177/post/${id.id}`,
+      const res = await instance.post(
+        `/post/${id.id}`,
         {
           title,
           content,

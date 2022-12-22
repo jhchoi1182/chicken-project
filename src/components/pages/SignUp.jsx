@@ -53,7 +53,9 @@ const SignUp = () => {
         </div>
         <StBtn width='' margin='0px -2.5rem 0px 0px' onClick={() => navigate('/')}>뒤로가기</StBtn>
       </SignupHeader>
-    <Chick src={register} margin="0px 0.6rem 0px 0px" />
+    <Box>
+      <Img src={register} />
+    </Box>
     <StForm gap="1.5rem" paddingTop="1rem" alignItem="center">
       <Div>
         <div className="input-box">
@@ -122,5 +124,27 @@ const SignupHeader = styled.div`
     font-weight: 700;
   }
 `
+
+const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 19rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  border: 2px solid #e67700;
+  margin-top: -1rem;
+  z-index: 15;
+  gap: 1rem;
+`;
+
+const Img = styled.img`
+  width: 20rem;
+  src: ${(props) => props.src};
+  margin: ${(props) => props.margin};
+  margin-top: -1.5rem;
+`;
 
 export default SignUp;

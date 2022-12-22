@@ -23,7 +23,7 @@ const Neighborhood = () => {
   return (
     <div>
       <Header />
-      <Chick src={login} />
+      <Chick />
       <StSpaceBetween>
         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${param}`)}>
           todo
