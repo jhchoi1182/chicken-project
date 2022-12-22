@@ -3,7 +3,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const instance = axios.create({
-  baseURL: "https://sparta-syk.site/",
+  baseURL: "http://13.125.129.177/",
 });
 
 const cookie = new Cookies();
@@ -19,6 +19,7 @@ const initialState = {
     id: "",
     content: "",
   },
+  done: [],
   isLoading: false,
   error: null,
 };
@@ -55,12 +56,24 @@ export const __addTodo = createAsyncThunk(
 export const __isdoneTodo = createAsyncThunk(
   "todos/isdoneTodo",
   async (payload, thunkAPI) => {
+    console.log(payload)
     try {
+      let done = !payload.done
       const todo = await instance.patch(
-        `/todo/${payload.userId}/${payload.todoId}?done=${!payload.done}`
+        `/todo/${payload.userId}/${payload.todoId}?done=${done}`
       );
-      return thunkAPI.fulfillWithValue(payload.id);
+      return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
+      const msg = err.response.data.msg
+      if (msg === "하루 개수 제한 2개") {
+        alert("하루 개수 제한이 2개입니다.");
+      } else if (msg === '날짜 지난 TODO 완료 취소 불가.') {
+        alert('날짜 지난 TODO 완료 취소 불가.')
+      } else if (msg === '날짜 지난 TODO 내용 수정 불가.') {
+        alert('날짜 지난 TODO 내용 수정 불가.')
+      } else if (msg === '존재하지 않는 TODO') {
+        alert('존재하지 않는 TODO')
+      }
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -90,6 +103,10 @@ export const __updateTodo = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (err) {
+      const msg = err.response.data.msg
+      if (msg === 'TODO내용 없음.') {
+        alert('TODO내용 없음.')
+      }
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -130,8 +147,9 @@ const todoSlice = createSlice({
     },
     [__deleteTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
+      // console.log(action.payload)
       state.todos = state.todos.filter((value) => {
-        return value.id !== action.payload;
+        return value !== action.payload;
       });
     },
     [__deleteTodo.rejected]: (state, action) => {
@@ -144,6 +162,7 @@ const todoSlice = createSlice({
     },
     [__updateTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log(action.payload)
       state.todos = state.todos.map((value) => {
         if (value.id === action.payload.id) {
           return action.payload;
@@ -162,11 +181,13 @@ const todoSlice = createSlice({
     },
     [__isdoneTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
+      // console.log(action.payload.done)
+      console.log(state)
       state.todos = state.todos.map((el) =>
-        el.id === action.payload
+        el.todoId === action.payload.todoId
           ? {
             ...el,
-            isDone: !el.isDone,
+            done: !el.done,
           }
           : el
       );

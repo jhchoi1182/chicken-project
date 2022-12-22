@@ -12,7 +12,7 @@ const Form = () => {
   const dispatch = useDispatch();
 
   const param = useParams();
-  console.log(param);
+  // console.log(param);
   const addSubmitHandler = (e) => {
     e.preventDefault();
 

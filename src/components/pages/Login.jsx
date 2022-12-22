@@ -45,6 +45,7 @@ const Login = () => {
       <LoginHeader>Todo</LoginHeader>
       <Box>
         <Img src={login} />
+        <label>알 수 없는 알</label>
       </Box>
       <StForm gap="1.5rem" paddingTop="1rem" alignItem="center" onSubmit={onSubmitHandler}>
         <Div>

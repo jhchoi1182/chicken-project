@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import login from "../../images/login.webp"
@@ -16,6 +16,10 @@ const Chick = (props) => {
   const chickImg = [lv1, lv2, lv3, lv4, lv5]
   const { src, width, margin } = props;
   const styles = { src, width, margin };
+  
+  useEffect(()=> {
+  },[user.userLevel])
+
   return (
     <Box>
       <Img {...styles} src={chickImg[user.userLevel-1]} alt="" />

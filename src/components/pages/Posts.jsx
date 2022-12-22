@@ -35,7 +35,7 @@ const Posts = () => {
   useEffect(() => {
     dispatch(getPosts(id));
   }, [dispatch, id]);
-  console.log(id);
+  // console.log(id);
   return (
     <div>
       <PostDetail postId={postId} mode={mode} setMode={setMode} />

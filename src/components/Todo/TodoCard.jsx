@@ -28,6 +28,7 @@ const TodoCard = ({ todo }) => {
     setUpdateId(true);
   };
 
+  // console.log(todo.done)
   const updateHandler = (id) => {
     dispatch(__updateTodo({ userId: param.id, todoId: id, content: input }));
     setUpdateId(false);
@@ -67,7 +68,7 @@ const TodoCard = ({ todo }) => {
 
       <UpdateBtn onClick={() => deleteHandler(todo.todoId)}>삭제</UpdateBtn>
       <UpdateBtn onClick={isDoneHandler}>
-        {todo.isDone ? "취소" : "완료"}
+        {todo.done ? "취소" : "완료"}
       </UpdateBtn>
     </CardBox>
   );
