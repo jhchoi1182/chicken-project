@@ -21,11 +21,11 @@ const Todos = () => {
       <Header />
       <Chick src={lv4} />
       <div>
-      <StSpaceBetween>
+      <StSpaceBetween marginBottom="1rem">
         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${param}`)}>
           todo
         </StBtn>
-        <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/`)}>
+        <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/post/${param}`)}>
           내 이야기
         </StBtn>
         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/neighborhood/${param}`)}>

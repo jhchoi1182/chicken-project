@@ -3,12 +3,14 @@ import Chick from "../shared/Chick";
 import Header from "../shared/Header";
 import lv3 from "../../images/LV3.webp";
 import StBtn from "../ui/buttons/StBtn";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getPosts, delPost } from "../../redux/modules/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PostDetail from "./PostDetail";
+import StSpaceBetween from "../ui/div/StSpaceBetween";
 const Posts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { id } = useParams();
   const [postId, setPostId] = useState("");
   const [mode, setMode] = useState(null);
@@ -33,24 +35,24 @@ const Posts = () => {
   useEffect(() => {
     dispatch(getPosts(id));
   }, [dispatch, id]);
-
+  console.log(id);
   return (
     <div>
       <PostDetail postId={postId} mode={mode} setMode={setMode} />
 
       <Header />
       <Chick src={lv3} />
-      <div style={{ display: "flex" }}>
-        <StBtn margin={"0 10px"} color={"#e67700"}>
+      <StSpaceBetween>
+        <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${id}`)}>
           todo
         </StBtn>
-        <StBtn margin={"0 10px"} color={"#e67700"}>
+        <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/post/${id}`)}>
           내 이야기
         </StBtn>
-        <StBtn margin={"0 10px"} color={"#e67700"}>
+        <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/neighborhood/${id}`)}>
           양계장이웃들
         </StBtn>
-      </div>
+      </StSpaceBetween>
       <div
         style={{
           color: "#e67700",

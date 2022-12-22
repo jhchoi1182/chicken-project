@@ -1,9 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 const instance = axios.create({
   baseURL: "http://13.125.129.177",
 });
+
+const cookie = new Cookies()
+const getCookie = cookie.get("token");
+instance.interceptors.request.use((config) => {
+  config.headers.authorization = `Bearer ${getCookie}`;
+  return config;
+});
+
+
 //혜민님 화이팅입니다.
 const initialState = {
   posts: [],
@@ -16,31 +26,19 @@ const initialState = {
 export const delPost = createAsyncThunk(
   "postsSlice/delPost",
   async ({ postId, id }, thunkAPI) => {
-    const headers = {
-      authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3MTYwNTIwNCwiZXhwIjoxNjcxNjkxNjA0fQ.CKrZWgUO4JpEOE3r7UkL4C2Bs9URVoxqschGUtwri7o",
-    };
     try {
       const res = await axios.delete(
-        `http://13.125.129.177/post/${id}/${postId}`,
-        {
-          headers: headers,
-        }
-      );
+        `http://13.125.129.177/post/${id}/${postId}`);
       const data = await instance.get(`/post/${id}`);
       const result = data.data;
       return result;
-    } catch (error) {}
+    } catch (error) { }
   }
 );
 //updatePost
 export const updatePost = createAsyncThunk(
   "postsSlice/updatePost",
   async ({ id, postId, title, content }) => {
-    const headers = {
-      authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3MTYwNTIwNCwiZXhwIjoxNjcxNjkxNjA0fQ.CKrZWgUO4JpEOE3r7UkL4C2Bs9URVoxqschGUtwri7o",
-    };
     try {
       const res = await axios.patch(
         `http://13.125.129.177/post/${id.id}/${postId}`,
@@ -48,14 +46,11 @@ export const updatePost = createAsyncThunk(
           title,
           content,
         },
-        {
-          headers: headers,
-        }
       );
       const data = await instance.get(`/post/${id.id}`);
       const result = data.data;
       return result;
-    } catch (error) {}
+    } catch (error) { }
   }
 );
 //getPost
@@ -72,10 +67,6 @@ export const getPost = createAsyncThunk(
 export const addPost = createAsyncThunk(
   "postsSlice/addPost",
   async ({ title, content, id }, thunkAPI) => {
-    const headers = {
-      authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3MTYwNTIwNCwiZXhwIjoxNjcxNjkxNjA0fQ.CKrZWgUO4JpEOE3r7UkL4C2Bs9URVoxqschGUtwri7o",
-    };
     try {
       const res = await axios.post(
         `http://13.125.129.177/post/${id.id}`,
@@ -83,9 +74,6 @@ export const addPost = createAsyncThunk(
           title,
           content,
         },
-        {
-          headers: headers,
-        }
       );
       const data = await instance.get(`/post/${id.id}`);
       const result = data.data;
