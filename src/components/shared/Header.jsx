@@ -33,12 +33,12 @@ const Header = (props) => {
     }
   }, [isCookie])
 
-  console.log(tokenId);
+  console.log(user.userid);
   const { disply, justifyContent, divWidth, divFont } = props;
   const styles = { disply, justifyContent, divWidth, divFont };
   return <Wrap {...styles}>
     <div className="loginInfo">
-      <Button onClick={() => navigate(`/todos/${user.userid}`)}>내 둥지</Button>
+      <Button onClick={() => navigate(`/todos/${tokenId.login.tokenId}`)}>내 둥지</Button>
       {tokenId.login.tokenId === user.userid ? <label>{`${user.nickname} 님`}</label> : null}
       {loginState ? <StBtn width="5.5rem" onClick={deleteTokenHandler}>로그아웃</StBtn> : <StBtn width="5.5rem" onClick={() => navigate('/')}>로그인</StBtn>}
     </div>

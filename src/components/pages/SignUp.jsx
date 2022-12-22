@@ -55,6 +55,7 @@ const SignUp = () => {
       </SignupHeader>
     <Box>
       <Img src={register} />
+      <label>알 수 없는 알</label>
     </Box>
     <StForm gap="1.5rem" paddingTop="1rem" alignItem="center">
       <Div>

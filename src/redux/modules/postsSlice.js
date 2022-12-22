@@ -3,7 +3,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const instance = axios.create({
-  baseURL: "https://sparta-syk.site/",
+  baseURL: "http://13.125.129.177/",
 });
 
 const cookie = new Cookies()
@@ -79,7 +79,7 @@ export const addPost = createAsyncThunk(
       const result = data.data;
       return result;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
   //   async (action, thunkAPI) => {

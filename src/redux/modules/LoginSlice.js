@@ -3,7 +3,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const instance = axios.create({
-  baseURL: "https://sparta-syk.site/",
+  baseURL: "http://13.125.129.177/",
 });
 
 const cookie = new Cookies()
@@ -127,7 +127,7 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     tokenHandler: (state, action) => {
-      console.log(action.payload)
+      // console.log(action.payload)
       state.tokenId = action.payload;
     },
   },
@@ -150,8 +150,10 @@ const loginSlice = createSlice({
       })
       .addCase(__login.fulfilled, (state, action) => {
         state.isLoading = false;
+        // console.log(action.payload);
         state.userId = action.payload.data.userId;
         state.status = action.payload.status;
+        state.tokenId = action.payload.data.userId;
       })
       .addCase(__login.rejected, (state, action) => {
         state.isLoading = false;
@@ -175,7 +177,7 @@ const loginSlice = createSlice({
       })
       .addCase(__neighborhood.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+        // console.log(action.payload);
         state.neighbor = action.payload;
       })
       .addCase(__neighborhood.rejected, (state, action) => {

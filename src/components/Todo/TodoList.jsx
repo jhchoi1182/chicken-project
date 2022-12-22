@@ -10,6 +10,7 @@ const TodoList = () => {
   const { isLoading, todos } = useSelector((state) => state.todos);
   const param = useParams();
 
+  console.log(todos);
   useEffect(() => {
     dispatch(__getTodo(param.id)).then((res) => {});
   }, []);

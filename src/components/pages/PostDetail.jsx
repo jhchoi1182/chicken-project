@@ -17,7 +17,7 @@ const PostDetail = ({ btnText, postId, mode, setMode }) => {
 
   const inputModeHandler = () => {
     if (inputDis) {
-      console.log(1); //작성됨
+      // console.log(1); //작성됨
       setInputDis(!inputDis);
     } else {
       //input 작성안됨
