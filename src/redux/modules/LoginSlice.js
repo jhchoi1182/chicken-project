@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: "http://13.125.129.177",
 });
 
-const cookie = new Cookies();
+const cookie = new Cookies()
 const getCookie = cookie.get("token");
 instance.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${getCookie}`;
@@ -29,7 +29,6 @@ export const __signUp = createAsyncThunk(
       return thunkAPI.fulfillWithValue(register.data.msg);
     } catch (error) {
       const msg = error.response.data.msg;
-      console.log(msg);
       if (msg === "ID ALREADY EXISTS") {
         alert("아이디가 중복되었습니다.");
       } else if (msg === "NICKNAME ALREADY EXISTS") {
@@ -58,7 +57,7 @@ export const __login = createAsyncThunk(
       return thunkAPI.fulfillWithValue(login);
     } catch (error) {
       if (error.response.status === 400) {
-        alert("일치하는 정보가 없습니다.");
+        alert("아이디와 비밀번호를 다시 입력해주세요.");
       } else if (error.response.status === 401) {
         alert("아이디 또는 비밀번호가 틀렸습니다");
       }
@@ -67,8 +66,57 @@ export const __login = createAsyncThunk(
   }
 );
 
+export const __userInfo = createAsyncThunk(
+  "USER_TODO",
+  async (id, thunkAPI) => {
+    try {
+      const login = await instance.get(`/user/${id}`);
+      return thunkAPI.fulfillWithValue(login.data.userInfo);
+    } catch (error) {
+      if (error.response.status === 400) {
+        alert("비정상적인 접근입니다.");
+      } else if (error.response.status === 401) {
+        alert("존재하지 않는 계정입니다.");
+      }
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
+  }
+);
+
+export const __neighborhood = createAsyncThunk(
+  "NEIGHBOR_TODO",
+  async (payload, thunkAPI) => {
+    try {
+      const neighbor = await instance.get(`/user/neighbor`);
+      return thunkAPI.fulfillWithValue(neighbor.data.randomUsers);
+    } catch (error) {
+      if (error.response.status === 400) {
+        alert("비정상적인 접근입니다.");
+      }
+      return thunkAPI.rejectWithValue(error.response.status);
+    }
+  }
+);
+
+// export const __mainRandom = createAsyncThunk(
+//   "RANDOM_TODO",
+//   async (payload, thunkAPI) => {
+//     console.log('안녕')
+//     try {
+//       const random = await instance.get('/user/random');
+//       console.log('안녕')
+//       return thunkAPI.fulfillWithValue(console.log(random));
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.response.status);
+//     }
+//   }
+// );
+
+
 const initialState = {
   userId: "",
+  user: {},
+  neighbor: [],
   isLoading: false,
   status: "",
 };
@@ -96,14 +144,38 @@ const loginSlice = createSlice({
       })
       .addCase(__login.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
         state.userId = action.payload.data.userId;
         state.status = action.payload.status;
       })
       .addCase(__login.rejected, (state, action) => {
         state.isLoading = false;
         state.status = action.payload;
-      });
+      })
+
+      .addCase(__userInfo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__userInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(__userInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.status = action.payload;
+      })
+
+      .addCase(__neighborhood.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__neighborhood.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+        state.neighbor = action.payload;
+      })
+      .addCase(__neighborhood.rejected, (state, action) => {
+        state.isLoading = false;
+        state.status = action.payload;
+      })
   },
 });
 
