@@ -1,0 +1,50 @@
+// import React, { useEffect } from "react";
+// import Chick from "../shared/Chick";
+// import Header from "../shared/Header";
+// import login from "../../images/login.webp";
+// import lv4 from "../../images/LV4.webp";
+// import StInput from "../ui/inputs/StInput";
+
+// //새로 추가한 부분
+// import TodoForm from "../Todo/TodoForm";
+// import TodoList from "../Todo/TodoList";
+// import StSpaceBetween from "../ui/div/StSpaceBetween";
+// import StBtn from "../ui/buttons/StBtn";
+// import { useNavigate, useParams } from "react-router";
+// import { useDispatch } from "react-redux";
+// import { __mainRandom } from "../../redux/modules/LoginSlice";
+
+// const Main = () => {
+//   const dispatch = useDispatch()
+
+//   useEffect(() => {
+//     dispatch(__mainRandom())
+//   },[])
+
+//   const navigate = useNavigate()
+//   const param = useParams().id;
+
+//   return (
+//     <div>
+//       <Header />
+//       <Chick />
+//       <div>
+//       <StSpaceBetween>
+//         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/todos/${param}`)}>
+//           todo
+//         </StBtn>
+//         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/`)}>
+//           내 이야기
+//         </StBtn>
+//         <StBtn width="7.5rem" color={"#e67700"} onClick={() => navigate(`/neighborhood/${param}`)}>
+//           양계장이웃들
+//         </StBtn>
+//       </StSpaceBetween>
+//         <TodoForm></TodoForm>
+//         <TodoList></TodoList>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Main;
