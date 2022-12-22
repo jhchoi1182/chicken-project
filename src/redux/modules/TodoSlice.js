@@ -101,7 +101,7 @@ export const __updateTodo = createAsyncThunk(
           content: payload.content,
         }
       );
-      return thunkAPI.fulfillWithValue(todo.data);
+      return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       const msg = err.response.data.msg
       if (msg === 'TODO내용 없음.') {
@@ -149,7 +149,7 @@ const todoSlice = createSlice({
       state.isLoading = false;
       // console.log(action.payload)
       state.todos = state.todos.filter((value) => {
-        return value !== action.payload;
+        return value.todoId !== action.payload;
       });
     },
     [__deleteTodo.rejected]: (state, action) => {
@@ -164,8 +164,8 @@ const todoSlice = createSlice({
       state.isLoading = false;
       console.log(action.payload)
       state.todos = state.todos.map((value) => {
-        if (value.id === action.payload.id) {
-          return action.payload;
+        if (value.todoId === action.payload.todoId) {
+          return { ...value, content: action.payload.content }
         } else {
           return value;
         }

@@ -54,9 +54,9 @@ const TodoCard = ({ todo }) => {
           onChange={(e) => setInput(e.target.value)}
         ></UpdateInput>
       )}
-
+{/* // 간접 / 직접=> this, 파라미터  간접함수.bind() */}
       {updateId !== true ? (
-        <UpdateBtn onClick={() => makeUpdateMode(todo.todoId)}>수정</UpdateBtn>
+        <UpdateBtn onClick={()=>makeUpdateMode(todo.todoId)}>수정</UpdateBtn>
       ) : (
         <>
           <UpdateBtn onClick={() => updateHandler(todo.todoId)}>
